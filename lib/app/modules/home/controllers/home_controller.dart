@@ -1,23 +1,29 @@
+import 'package:ellias/app/models/teams.dart';
+import 'package:ellias/app/services/team_service.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class HomeController extends GetxController {
-  //TODO: Implement HomeController
+  RxList<Team> teams = TeamService.to.teams;
+  TextEditingController textController = TextEditingController();
 
-  final count = 0.obs;
   @override
   void onInit() {
     super.onInit();
   }
 
-  @override
-  void onReady() {
-    super.onReady();
+  void addTeam() {
+    TeamService.to.addTeam(textController.text);
+    textController.clear();
   }
 
-  @override
-  void onClose() {
-    super.onClose();
+  void changeTeam(int index) {
+    TeamService.to.changeTeam(index, textController.text);
+    textController.clear();
   }
 
-  void increment() => count.value++;
+  void deleteTeam() {
+    TeamService.to.deleteTeam(textController.text);
+    textController.clear();
+  }
 }
